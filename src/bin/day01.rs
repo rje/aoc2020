@@ -1,5 +1,5 @@
-use std::io::{BufReader, BufRead};
 use std::fs::File;
+use std::io::{BufRead, BufReader};
 
 fn main() {
     let numbers = parse_numbers_from_file("data/day01/problem_1.txt");
@@ -7,14 +7,14 @@ fn main() {
     solve_problem_2(&numbers);
 }
 
-fn parse_numbers_from_file(path : &str) -> Vec<i32> {
+fn parse_numbers_from_file(path: &str) -> Vec<i32> {
     let file = File::open(path).expect("Invalid path name");
     let reader = BufReader::new(file);
 
     let nums = reader
         .lines()
         .filter_map(Result::ok)
-        .map(|line| { line.parse::<i32>() })
+        .map(|line| line.parse::<i32>())
         .filter_map(Result::ok)
         .collect();
 
@@ -28,12 +28,12 @@ fn solve_problem_1(numbers: &Vec<i32>) {
     println!("Result: {0}", pair.0 * pair.1);
 }
 
-fn find_pair(numbers : &Vec<i32>, target : i32) -> Option<(i32, i32)> {
+fn find_pair(numbers: &Vec<i32>, target: i32) -> Option<(i32, i32)> {
     for a in numbers {
         for b in numbers {
             let total = a + b;
             if total == target {
-                return Some((*a, *b))
+                return Some((*a, *b));
             }
         }
     }
@@ -41,7 +41,7 @@ fn find_pair(numbers : &Vec<i32>, target : i32) -> Option<(i32, i32)> {
     None
 }
 
-fn solve_problem_2(numbers : &Vec<i32>) {
+fn solve_problem_2(numbers: &Vec<i32>) {
     println!("Problem 2:");
     let set = find_set(numbers, 2020).expect("No valid set found!");
     println!("Set: {:?}", set);
