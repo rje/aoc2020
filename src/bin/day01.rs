@@ -25,7 +25,7 @@ fn solve_problem_1(numbers: &Vec<i32>) {
     println!("Problem 1:");
     let pair = find_pair(&numbers, 2020).expect("No valid pair found!");
     println!("Pair: {:?}", pair);
-    println!("Result: {0}", pair.0 * pair.1);
+    println!("Result: {}", pair.0 * pair.1);
 }
 
 fn find_pair(numbers: &Vec<i32>, target: i32) -> Option<(i32, i32)> {
@@ -45,7 +45,7 @@ fn solve_problem_2(numbers: &Vec<i32>) {
     println!("Problem 2:");
     let set = find_set(numbers, 2020).expect("No valid set found!");
     println!("Set: {:?}", set);
-    println!("Result: {0}", set.0 * set.1 * set.2);
+    println!("Result: {}", set.0 * set.1 * set.2);
 }
 
 fn find_set(numbers: &Vec<i32>, target: i32) -> Option<(i32, i32, i32)> {
