@@ -3,3 +3,10 @@
 [[package]]
 name = "aoc"
 version = "0.1.0"
+dependencies = [
+ "parsing",
+]
+
+[[package]]
+name = "parsing"
+version = "0.1.0"

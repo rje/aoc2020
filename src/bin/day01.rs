@@ -1,24 +1,9 @@
-use std::fs::File;
-use std::io::{BufRead, BufReader};
+use parsing;
 
 fn main() {
-    let numbers = parse_numbers_from_file("data/day01/problem_1.txt");
+    let numbers = parsing::parse_numbers_from_file("data/day01/problem_1.txt");
     solve_problem_1(&numbers);
     solve_problem_2(&numbers);
-}
-
-fn parse_numbers_from_file(path: &str) -> Vec<i32> {
-    let file = File::open(path).expect("Invalid path name");
-    let reader = BufReader::new(file);
-
-    let nums = reader
-        .lines()
-        .filter_map(Result::ok)
-        .map(|line| line.parse::<i32>())
-        .filter_map(Result::ok)
-        .collect();
-
-    return nums;
 }
 
 fn solve_problem_1(numbers: &Vec<i32>) {
