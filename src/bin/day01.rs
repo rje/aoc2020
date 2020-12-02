@@ -1,7 +1,7 @@
-use parsing;
+use parsing::day01;
 
 fn main() {
-    let numbers = parsing::parse_numbers_from_file("data/day01/problem_1.txt");
+    let numbers = day01::parse_numbers_from_file("data/day01/problem_1.txt");
     solve_problem_1(&numbers);
     solve_problem_2(&numbers);
 }
