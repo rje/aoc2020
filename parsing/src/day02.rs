@@ -1,3 +1,4 @@
+use crate::parsing_error::ParseError;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::str::FromStr;
@@ -11,7 +12,7 @@ pub struct PasswordEntry {
 }
 
 impl FromStr for PasswordEntry {
-    type Err = std::num::ParseIntError;
+    type Err = ParseError;
 
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         let elements: Vec<&str> = s
@@ -19,6 +20,10 @@ impl FromStr for PasswordEntry {
             // filtering to get rid of any empty strings in case of adjacent delimiters
             .filter(|entry| entry.len() > 0)
             .collect();
+
+        if elements.len() != 4 {
+            return Err(ParseError::new("Invalid string in PasswordEntry::from_str"));
+        }
 
         let entry = PasswordEntry {
             num1: elements[0].parse::<usize>().expect("Can't parse num1"),
