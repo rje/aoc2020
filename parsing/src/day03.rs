@@ -14,6 +14,9 @@ pub fn parse_tree_map(path: &str) -> Vec<Vec<i32>> {
 
 fn parse_tree_line(line: &str) -> Vec<i32> {
     line.chars()
-        .map(|to_convert| if to_convert == '.' { 0 } else { 1 })
+        .map(|to_convert| match to_convert {
+            '.' => 0,
+            _ => 1,
+        })
         .collect()
 }
