@@ -13,11 +13,7 @@ pub fn parse_tree_map(path: &str) -> Vec<Vec<i32>> {
 }
 
 fn parse_tree_line(line: &str) -> Vec<i32> {
-    let mut retval: Vec<i32> = Vec::new();
-
-    for char in line.chars() {
-        retval.push(if char == '.' { 0 } else { 1 });
-    }
-
-    return retval;
+    line.chars()
+        .map(|to_convert| if to_convert == '.' { 0 } else { 1 })
+        .collect()
 }
