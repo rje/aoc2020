@@ -1,4 +1,5 @@
 use parsing;
+
 fn main() {
     let data = parsing::day06::parse("data/day06/problem_1.txt");
     println!("Data len: {}", data.len());
