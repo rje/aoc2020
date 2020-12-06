@@ -1,7 +1,6 @@
+use crate::util::get_lines;
 use regex::Regex;
 use std::collections::HashMap;
-use std::fs::File;
-use std::io::{BufRead, BufReader};
 
 #[derive(Debug, PartialEq)]
 pub struct Passport {
@@ -102,15 +101,11 @@ fn validate_passport_id(to_parse: &String) -> bool {
 }
 
 pub fn parse_passport_file(path: &str) -> Vec<Passport> {
-    let file = File::open(path).expect("Invalid path name");
-    let reader = BufReader::new(file);
-
     let mut to_return: Vec<Passport> = Vec::new();
     let mut passport = Passport::new();
 
-    for line in reader.lines() {
-        let untrimmed_text = line.expect("Invalid line in parsing!");
-        let text = untrimmed_text.trim();
+    for line in get_lines(path) {
+        let text = line.trim();
         if text.len() == 0 {
             to_return.push(passport);
             passport = Passport::new();

@@ -1,14 +1,10 @@
-use std::fs::File;
-use std::io::{BufRead, BufReader};
+use crate::util::get_lines;
 
 pub fn parse(path: &str) -> Vec<Vec<u32>> {
-    let file = File::open(path).expect("Invalid path name");
-    let reader = BufReader::new(file);
-
     let mut collection: Vec<Vec<u32>> = Vec::new();
     let mut entry: Vec<u32> = Vec::new();
 
-    for line in reader.lines().filter_map(Result::ok).into_iter() {
+    for line in get_lines(path) {
         let trimmed = line.trim();
         match trimmed.len() {
             0 => {

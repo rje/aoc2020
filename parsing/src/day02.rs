@@ -1,6 +1,5 @@
 use crate::parsing_error::ParseError;
-use std::fs::File;
-use std::io::{BufRead, BufReader};
+use crate::util::get_lines;
 use std::str::FromStr;
 
 #[derive(Debug, PartialEq)]
@@ -39,12 +38,7 @@ impl FromStr for PasswordEntry {
 }
 
 pub fn parse_password_file(path: &str) -> Vec<PasswordEntry> {
-    let file = File::open(path).expect("Invalid path name");
-    let reader = BufReader::new(file);
-
-    let pairs = reader
-        .lines()
-        .filter_map(Result::ok)
+    let pairs = get_lines(path)
         .map(|line| PasswordEntry::from_str(&line))
         .filter_map(Result::ok)
         .collect();

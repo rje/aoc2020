@@ -1,13 +1,7 @@
-use std::fs::File;
-use std::io::{BufRead, BufReader};
+use crate::util::get_lines;
 
 pub fn parse_boarding_passes(path: &str) -> Vec<(u8, u8, u32)> {
-    let file = File::open(path).expect("Invalid path name");
-    let reader = BufReader::new(file);
-
-    let results = reader
-        .lines()
-        .filter_map(Result::ok)
+    let results = get_lines(path)
         .map(|line| parse_boarding_pass(&line))
         .collect();
 

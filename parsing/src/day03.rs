@@ -1,14 +1,7 @@
-use std::fs::File;
-use std::io::{BufRead, BufReader};
+use crate::util::get_lines;
 
 pub fn parse_tree_map(path: &str) -> Vec<Vec<i32>> {
-    let file = File::open(path).expect("Invalid path name");
-    let reader = BufReader::new(file);
-    let results = reader
-        .lines()
-        .filter_map(Result::ok)
-        .map(|line| parse_tree_line(&line))
-        .collect();
+    let results = get_lines(path).map(|line| parse_tree_line(&line)).collect();
     return results;
 }
 
