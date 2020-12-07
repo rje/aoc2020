@@ -15,6 +15,7 @@ fn solve_problem_1(data: &HashMap<Bag, Vec<BagRule>>) {
     let contained_in = build_containment_structure(&data);
     let mut valid_options: HashSet<Bag> = HashSet::new();
     valid_options.insert(to_find);
+
     loop {
         let count = valid_options.len();
         let mut new_options: HashSet<Bag> = HashSet::new();
@@ -34,6 +35,7 @@ fn solve_problem_1(data: &HashMap<Bag, Vec<BagRule>>) {
         }
         valid_options = new_options;
     }
+
     println!("Final option count: {}", valid_options.len() - 1);
 }
 
